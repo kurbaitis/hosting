@@ -1,0 +1,42 @@
+#!/bin/bash
+apt-get update
+apt-get upgrade -y
+z=$(apt-cache search zlib | grep dev | cut -d ' ' -f 1)
+o=$(apt-cache search openssl | cut -d ' ' -f 1)
+r="(apache)|(php)|(aolserver)"
+
+apt-get install -y curl openssl ca-certificates build-essential libc6-dev g++ gcc libcap2-bin git
+
+for l in $ps $o
+do
+if [[ ! $l =~ $r ]]
+then
+apt-get install -y $l
+fi
+done
+
+useradd w -r -m -s /bin/bash
+mkdir .ssh && ssh-keygen -t rsa -f .ssh/id_rsa -b 4096 -N ''
+mv .ssh /home/w/
+chown -R w:w /home/w/.ssh
+
+ho=`uname -a | cut -d ' ' -f 2`
+k=`head -1 /home/w/.ssh/id_rsa.pub`
+
+cat > /home/w/s <<EOF
+#!/bin/bash
+set +e
+
+rm -rf tmp
+git clone https://$1@github.com/kurbaitis/hosting.git tmp && rm -rf tmp/.git && mv tmp/* . && mv tmp/.env . && rm -rf tmp
+mkdir -p tls
+mkdir -p data
+
+/home/w/bin/setup
+EOF
+
+chown w:w /home/w/s
+chmod +x /home/w/s
+su - w -l -c './s'
+setcap 'cap_net_bind_service=+ep' /home/w/ruby/bin/ruby
+su - w

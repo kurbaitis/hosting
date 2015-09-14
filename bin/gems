@@ -1,0 +1,11 @@
+#!/bin/bash
+source $HOME/.env
+export PATH="$HOME/ruby/bin:$PATH"
+
+IFS=.
+ary=($GEMS)
+for i in "${!ary[@]}"
+do
+  gem install ${ary[$i]} --user-install --bindir=$HOME/ruby/bin
+done
+

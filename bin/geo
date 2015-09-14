@@ -1,0 +1,10 @@
+#!/bin/bash
+
+source .env
+c="curl -O $GEO_GZ"
+u="gunzip *.gz"
+m="mv *.mmdb $GEO_DB"
+
+$c
+$u
+$m

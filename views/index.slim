@@ -1,0 +1,18 @@
+p == t('description', m: mp)
+table border="1"
+  tr
+    th = t('max_players')
+    th = t('price_th', c: 'EUR')
+    th
+  - plans.each_with_index do |plan, i|
+    tr
+      td = plan[0]
+      td = plan[1]
+      td
+        a href='#{new(i)}' = t('order')
+p = t('refund')
+p 
+  'Create your own servers hosting:
+  a href='https://github.com/kurbaitis/hosting' target='_blank' Github
+p
+  a href='#{tu}' Tweet

@@ -1,0 +1,16 @@
+#!/bin/bash
+source $HOME/.env
+
+c=$(cat $RCACHE | awk '{print $5}' | sort | tail -n 1)
+r=$(cat $RCACHE | tr -cs '[ruby\-][:digit:].' '\n' | grep ruby | tail -n 1 | cut -c 1-10)
+f="$r.tar.xz"
+v="$RUBY_URL/$f"
+d="curl -O $v"
+u="tar xvfJ $f"
+source $HOME/.env
+
+$d
+$u
+
+cd $r && ./configure --prefix=$HOME/ruby; make; make install
+$HOME/bin/gems

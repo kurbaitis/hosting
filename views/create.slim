@@ -1,0 +1,11 @@
+p = t('order_complete')
+table border="1"
+  tr
+    th IP:PORT
+    td = address
+  tr
+    th RCON PASSWORD
+    td = rcon
+  tr
+    th = t('expires_at')
+    td = l(ltime(expires_at))

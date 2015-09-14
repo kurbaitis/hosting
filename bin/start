@@ -1,0 +1,9 @@
+#!/bin/bash
+trap ctrl_c INT
+
+source $HOME/.env
+export PATH="$PWD/ruby/bin:$PATH"
+
+ruby $HOME/geo.rb
+ruby $HOME/hosting.rb
+ruby $HOME/redirect.rb
