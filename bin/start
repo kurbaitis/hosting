@@ -1,9 +1,6 @@
 #!/bin/bash
 trap ctrl_c INT
 
-source $HOME/.env
-export PATH="$PWD/ruby/bin:$PATH"
+source /home/w/.env
 
-ruby $HOME/geo.rb
-ruby $HOME/hosting.rb
-ruby $HOME/redirect.rb
+ruby /home/w/hosting.rb > $OUTPUT 2>&1

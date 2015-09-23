@@ -1,21 +1,21 @@
 module Clouds::DC::Region
       
-      R1 = '^'
-      R2 = '\d+$'
+  R1 = '^'
+  R2 = '\d+$'
 
-      def dc_region
-        dc_regions.find(&method(:match))
-      end
+  def dc_region(binding)
+    dc_regions.find { |r| match(r, binding) }
+  end
       
-      private
+  private
       
-      def rx
-        Regexp.new([R1, dc_city, R2].join)
-      end
+  def rx(binding)
+    Regexp.new([R1, dc_city(binding), R2].join)
+  end
 
-      def match(s)
-        s.match(rx)
-      end
+  def match(s, binding)
+    s.match(rx(binding))
+  end
 
 end
 include Clouds::DC::Region

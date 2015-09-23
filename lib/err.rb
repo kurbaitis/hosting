@@ -3,11 +3,11 @@ module Err
   SR = Regexp.new(pwd)
   E = /(Exception)|(Error)/
 
-  def err(&block)
+  def err(binding, &block)
     yield
   rescue *err_classes => e
     sb(e)
-    stop
+    stop(binding)
   end
 
   private
@@ -28,8 +28,8 @@ module Err
   end
   
   def sb(e)
-    L.debug e.inspect
-    L.debug e.backtrace.inspect
+    puts e.inspect 
+    puts e.backtrace
     send(m, e.backtrace.select(&method(:srmatch))[0].to_s)
   end
   

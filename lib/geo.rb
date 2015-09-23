@@ -2,12 +2,12 @@ module Geo
   
   LR = /[a-z]{2}/  
   
-  def country 
-    geo.country.iso_code 
+  def country(binding) 
+    geo(binding).country.iso_code 
   end
   
-  def timezone 
-    geo.location.time_zone
+  def timezone(binding)
+    geo(binding).location.time_zone
   end
     
   def locale
@@ -18,8 +18,9 @@ module Geo
     hal.present? ? hal.to_s.match(LR)[0] : nil
   end
   
-  def coordinates
-    [geo.location.latitude, geo.location.longitude] 
+  def coordinates(binding)
+    l = geo(binding).location
+    [l.latitude, l.longitude] 
   end
   
   def hal
@@ -45,10 +46,6 @@ module Geo
   
   private
   
-  def rip
-    request.ip
-  end
-
   def available_locales
     e('AVAILABLE_LOCALES')
   end
@@ -57,8 +54,8 @@ module Geo
     eget('GEO_DB')
   end
 
-  def geo
-    MaxMindDB.new(dat).lookup(rip)
+  def geo(binding)
+    MaxMindDB.new(dat).lookup(rip(binding))
   end
 
 end

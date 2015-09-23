@@ -3,26 +3,26 @@ module Clouds
     
     GS = 'active'
 
-    def dc
-      sip(dck.droplets.create(droplet))
+    def dc(binding)
+      sip(dck.droplets.create(droplet(binding)))
     end
     
     private
     
-    def droplet
-      DropletKit::Droplet.new(args)
+    def droplet(binding)
+      DropletKit::Droplet.new(args(binding))
     end
 
-    def args
+    def args(binding)
       {
-        name: number,
-        region: dc_region,
+        name: rnumber,
+        region: dc_region(binding),
         size: dc_size,
         image: dc_image_id,
         ssh_keys: dc_ssh_keys,
         backups: false,
         ipv6: false,
-        user_data: user_data,
+        user_data: user_data(binding),
         private_networking: nil
       }
     end

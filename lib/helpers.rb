@@ -24,16 +24,12 @@ module Helpers
     err { rs(a) }
   end
   
-  def address
-   [ip, default_port].join(S6)
+  def address(binding)
+   [ip(binding), default_port].join(S6)
   end
 
-  def new(plan)
-    [:new, plan].join(S5)
-  end
-  
-  def ltime(time)
-    tz = TZInfo::Timezone.get(timezone)
+  def ltime(time, binding)
+    tz = TZInfo::Timezone.get(timezone(binding))
     tz.utc_to_local(time.utc)
   end
   

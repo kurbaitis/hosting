@@ -1,42 +1,51 @@
-#!/bin/bash
 apt-get update
 apt-get upgrade -y
-z=$(apt-cache search zlib | grep dev | cut -d ' ' -f 1)
-o=$(apt-cache search openssl | cut -d ' ' -f 1)
-r="(apache)|(php)|(aolserver)"
 
-apt-get install -y curl openssl ca-certificates build-essential libc6-dev g++ gcc libcap2-bin git
+apt-get install -y zlib1g-dev zlibc curl build-essential libc6-dev g++ gcc libcap2-bin libssl-dev libgdbm-dev libedit-dev libreadline-dev git
 
-for l in $ps $o
-do
-if [[ ! $l =~ $r ]]
-then
-apt-get install -y $l
-fi
-done
+cac='http://curl.haxx.se/ca/cacert.pem'
+ru='https://cache.ruby-lang.org/pub/ruby/stable'
 
 useradd w -r -m -s /bin/bash
 mkdir .ssh && ssh-keygen -t rsa -f .ssh/id_rsa -b 4096 -N ''
 mv .ssh /home/w/
-chown -R w:w /home/w/.ssh
+curl $cac -O
+cp cacert.pem /home/w/cacert.pem
 
-ho=`uname -a | cut -d ' ' -f 2`
-k=`head -1 /home/w/.ssh/id_rsa.pub`
+git config --global http.sslCAInfo $HOME/cacert.pem
+
+curl --cacert cacert.pem -L $ru > rsc
+
+c=$(cat rsc | grep ruby | grep xz | tail -1 | tr -cs '[:digit:]' | cut -d ' ' -f 5)
+r=$(cat rsc | tr -cs '[ruby\-][:digit:].' '\n' | grep ruby | tail -n 1 | cut -c 1-10)
+f="$r.tar.xz"
+v="$ru/$f"
+d="curl --cacert cacert.pem -O $v"
+u="tar xvfJ $f"
+
+$d
+$u
+
+cd $r && ./configure --prefix=/usr; make; make install
+
+setcap 'cap_net_bind_service=+ep' /usr/bin/ruby
 
 cat > /home/w/s <<EOF
 #!/bin/bash
 set +e
 
 rm -rf tmp
+
+git config --global http.sslCAInfo /home/w/cacert.pem
 git clone https://$1@github.com/kurbaitis/hosting.git tmp && rm -rf tmp/.git && mv tmp/* . && mv tmp/.env . && rm -rf tmp
 mkdir -p tls
 mkdir -p data
 
-/home/w/bin/setup
+/home/w/bin/gems
 EOF
 
-chown w:w /home/w/s
 chmod +x /home/w/s
+chown -R w:w /home/w
 su - w -l -c './s'
-setcap 'cap_net_bind_service=+ep' /home/w/ruby/bin/ruby
+
 su - w
