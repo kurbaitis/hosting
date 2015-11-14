@@ -1,7 +1,7 @@
 module Details
 
-  def numplayers(binding)
-    players[plan(binding)]
+  def numplayers
+    players[plan]
   end
   
   def rcon
@@ -12,12 +12,12 @@ module Details
     Random.new.seed.to_s[1..11]
   end
    
-  def user_data_a(binding)
-    { numplayers: numplayers(binding), rcon: rcon, expires_at: expires_at }.to_a
+  def user_data_a
+    { numplayers: numplayers, rcon: rcon, expires_at: expires_at }.to_a
   end
 
-  def user_data(binding)
-    user_data_a(binding).map(&method(:jd)).join(N)
+  def user_data
+    user_data_a.map(&method(:jd)).join(N)
   end
   
   def expires_at

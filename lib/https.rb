@@ -14,8 +14,7 @@ module Https
     BindAddress: ENV.fetch('WHOST'),
     DocumentRoot: "./public",
     SSLEnable: true,
-    MimeTypes: { 'html' => 'text/html' },
-    Logger: WEBrick::Log.new(ENV.fetch('OUTPUT'))
+    MimeTypes: { 'html' => 'text/html' }
   }.merge(SSL_OPTIONS)
 
   WEBrick::GenericServer.class_eval do
@@ -29,7 +28,7 @@ module Https
   end
 
   def https
-    s  = WEBrick::HTTPServer.new OPTIONS
+    s  = WEBrick::HTTPServer.new OPTIONS.merge(Logger: L)
     Routes::Https.routes(s)
     trap('INT') { s.stop }
     s

@@ -3,11 +3,11 @@ module Err
   SR = Regexp.new(pwd)
   E = /(Exception)|(Error)/
 
-  def err(binding, &block)
+  def err(&block)
     yield
   rescue *err_classes => e
     sb(e)
-    stop(binding)
+    stop
   end
 
   private

@@ -1,14 +1,13 @@
 module Cloud
   
-  def cloud(binding)
-    i = i(binding)
+  def cloud
     (i.nil? ? default_cloud : clouds[i]).to_sym
   end
   
   private
 
-  def i(binding)
-    countries.index(country(binding).downcase)
+  def i
+    countries.index(country.downcase)
   end
 
 end

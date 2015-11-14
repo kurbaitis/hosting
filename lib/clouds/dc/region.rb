@@ -3,18 +3,18 @@ module Clouds::DC::Region
   R1 = '^'
   R2 = '\d+$'
 
-  def dc_region(binding)
-    dc_regions.find { |r| match(r, binding) }
+  def dc_region
+    dc_regions.find { |r| match(r) }
   end
       
   private
       
-  def rx(binding)
-    Regexp.new([R1, dc_city(binding), R2].join)
+  def rx
+    Regexp.new([R1, dc_city, R2].join)
   end
 
-  def match(s, binding)
-    s.match(rx(binding))
+  def match(s)
+    s.match(rx)
   end
 
 end

@@ -12,12 +12,12 @@ module Pay
   }
   ALL = MAP.values
 
-  def pay(binding, &block)
-    err(binding) do
-      if pfailed?(binding)
-        redirect_to(['/new/', p(binding)].join, binding)
+  def pay(&block)
+    err do
+      if pfailed?
+        redirect_to(['/new/', p].join)
       else
-        yield address(binding), rcon, l(ltime(expires_at, binding))
+        yield '127.0.0.1', '12312312312', l(ltime(expires_at))
       end
     end
   end
@@ -28,49 +28,49 @@ module Pay
     eget('PAYMENT_REASON')
   end
   
-  def p(binding)
-    params(binding)['plan'].to_i
+  def p
+    params['plan'].to_i
   end
  
-  def a(binding)
-    prices[p(binding)]    
+  def a
+    prices[p]    
   end
 
-  def amountc(binding)
-    (a(binding).to_f * MU).to_i
+  def amountc
+    (a.to_f * MU).to_i
   end
   
-  def pfailed?(binding)
-    params_invalid?(ALL, binding) || failed?(binding)
+  def pfailed?
+    params_invalid?(ALL) || failed?
   end
   
   def saip_key
     eget([ST, ee.upcase, AK].join(S4))
   end
 
-  def failed?(binding) 
-    payment = pcreate(binding).dup
+  def failed? 
+    payment = pcreate.dup
     payment.nil? || payment[:status] != SCS 
   end
   
-  def card(binding)
-    Hash[MAP.map{ |m| mpa(m, binding) }]
+  def card
+    Hash[MAP.map{ |m| mpa(m) }]
   end
   
-  def mpa(a, binding)
-    [a[0], params(binding)[a[1]]]
+  def mpa(a)
+    [a[0], params[a[1]]]
   end
 
-  def stoken(binding)
-    Stripe::Token.create(card: card(binding))
+  def stoken
+    Stripe::Token.create(card: card)
   end
 
-  def pcreate(binding)
+  def pcreate
     Stripe.api_key = saip_key 
     c = Stripe::Charge.create(
-      amount: amountc(binding),
+      amount: amountc,
       currency: currency,
-      source: stoken(binding),
+      source: stoken,
       description: payment_reason 
     )
     puts c.inspect

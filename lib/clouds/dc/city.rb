@@ -1,21 +1,21 @@
 module Clouds::DC::City
       
-  def dc_city(binding)
-    dc_cities[min_distance_city(binding)]
+  def dc_city
+    dc_cities[min_distance_city]
   end
       
   private
       
-  def distances(binding)
-    dc_cities.each_index { |i| di(i, binding) }
+  def distances
+    dc_cities.each_index { |i| di(i) }
   end
      
   def di(i, binding)
-    distance(coordinates(binding), dc_coordinates[i])
+    distance(coordinates, dc_coordinates[i])
   end
 
-  def min_distance_city(binding)
-    d = distances(binding)
+  def min_distance_city
+    d = distances
     d.index(d.min)
   end
 

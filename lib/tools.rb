@@ -89,12 +89,12 @@ module Tools
     spawn(File.join(pwd, 'bin', 'stop'))
   end
 
-  def stop(binding)
+  def stop
     fork do
       sleep 2
       stop_sh 
     end
-    redirect_to('/500', binding) 
+    redirect_to('/500') 
   end
   
   def include_modules
@@ -103,49 +103,54 @@ module Tools
     end
   end
   
+  def b
+   @b
+  end
+
   def header(binding) 
-    response(binding)['content-type'] = 'text/html'
-    erb('header', binding)
+    @b = binding
+    response['content-type'] = 'text/html'
+    erb('header')
   end
   
   def footer
     erb('footer')
   end
   
-  def tp(binding, &block)
-    yield amount(binding), currency, plan(binding) 
+  def tp(&block)
+    yield amount, currency, plan
   end
   
-  def plan(binding)
-    request(binding).request_uri.path.split(S5).last.to_i
+  def plan
+    request.request_uri.path.split(S5).last.to_i
   end
    
-  def amount(binding)
-    prices[plan(binding)]
+  def amount
+    prices[plan]
   end
   
-  def params(binding)
-    request(binding).query
+  def params
+    request.query
   end
  
-  def param_blank?(k, binding)
-    params(binding)[k].blank?
+  def param_blank?(k)
+    params[k].blank?
   end
 
-  def params_invalid?(c, binding)
-    c.any? { |k| param_blank?(k, binding) } 
+  def params_invalid?(c)
+    c.any? { |k| param_blank?(k) } 
   end
   
-  def rip(binding)
-    request(binding).remote_ip
+  def rip
+    request.remote_ip
   end
 
-  def redirect_to(path, binding)
+  def redirect_to(path)
     url = ['https://', eget('WHOST'), path].join
-    response(binding).status = 301
-    response(binding).body = "<HTML><A HREF=\"#{url}\">#{url}</A>.</HTML>\n" 
-    response(binding)['content-type'] = 'text/html'
-    response(binding)['location'] = url
+    response.status = 301
+    response.body = "<HTML><A HREF=\"#{url}\">#{url}</A>.</HTML>\n" 
+    response['content-type'] = 'text/html'
+    response['location'] = url
   end
  
   private
@@ -158,16 +163,16 @@ module Tools
     File.join('locales', [l, '.yml'].join)
   end
   
-  def erb(t, binding = nil)
+  def erb(t)
     ERB.new(File.read(File.join(views_path, [t, '.rhtml'].join))).result(binding)
   end
   
-  def response(binding)
-    binding.local_variable_get(:servlet_response)
+  def response
+    b.local_variable_get(:servlet_response)
   end
   
-  def request(binding)
-    binding.local_variable_get(:servlet_request)
+  def request
+    b.local_variable_get(:servlet_request)
   end
  
 end

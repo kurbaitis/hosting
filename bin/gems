@@ -5,5 +5,5 @@ IFS=.
 ary=($GEMS)
 for i in "${!ary[@]}"
 do
-  gem install ${ary[$i]} --user-install --bindir=$HOME/gbin
+  gem install ${ary[$i]} --user-install --bindir=$HOME/bin
 done

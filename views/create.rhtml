@@ -1,5 +1,5 @@
-<% pay(binding) do |address, rcon, expires_at| %>
 <%= header(binding) %>
+<% pay do |address, rcon, expires_at| %>
 <p><%= t('order_complete') %></p>
   <table border="1">
     <tr>
@@ -15,5 +15,5 @@
       <td><%= expires_at %></td>
     </tr>
   </table>
-<%= footer %>
 <% end %>
+<%= footer %>

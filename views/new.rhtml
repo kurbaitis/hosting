@@ -17,7 +17,7 @@
   <label for='cvc'><%= t('labels.cvc') %></label>
   <br />
   <input type='text' name='cvc' size='3' />
-  <% tp(binding) do |amount, currency, plan| %>
+  <% tp do |amount, currency, plan| %>
     <p><%= t('price', a: amount, c: currency) %></p>
     <input type='hidden' name='plan' value='<%= plan %>' />
   <% end %>
