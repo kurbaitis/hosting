@@ -12,3 +12,4 @@ cacert.pem
 .less*
 .ssh
 .vim*
+GeoLite2-City.*
