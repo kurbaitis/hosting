@@ -14,7 +14,7 @@ Login as root and run:
 
 ```t='GITHUB-ACCESS-TOKEN' && apt-get install -y curl ca-certificates && curl -H "Authorization: token $t" -H 'Accept: application/vnd.github.v3.raw' -O -L https://api.github.com/repos/kurbaitis/hosting/contents/public/s && bash s $t```
 
-Put your TLS cert into ```tls/cert``` and the key into ```tls/key```
+Put your TLS certificate (cert and key into one file) into ```tls/crt``` and review ```haproxy.conf``` to make sure your configuration is correct
 
 Edit ```.env``` file
 
