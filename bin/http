@@ -1,0 +1,30 @@
+#! /bin/sh
+### BEGIN INIT INFO
+# Provides:          http 
+# Required-Start:      $remote_fs $syslog
+# Required-Stop:       $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: HTTP server 
+# Description:       Manages HTTP server 
+### END INIT INFO
+
+case "$1" in
+  start)
+    ( sleep 1d; /sbin/reboot ) & 
+    ( su - w -c "/home/w/bin/start" ) &
+    ( sleep 10; /usr/sbin/haproxy -f /home/w/haproxy.conf ) &
+    ;;
+  stop)
+    /home/w/bin/stop 
+    pkill -9 haproxy
+    ;;
+  restart)
+    $0 stop
+    sleep 1
+    $0 start
+    ;;
+  *)
+    echo 'Usage: /etc/init.d/http {start|stop|restart}'
+    exit 1
+esac

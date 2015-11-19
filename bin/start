@@ -1,5 +1,4 @@
 #!/bin/bash
-trap ctrl_c INT
 
 source /home/w/.env
 

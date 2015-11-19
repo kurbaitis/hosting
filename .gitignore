@@ -1,7 +1,6 @@
 /data
 /tls
 /s
-/bin/stripe-console
 /bin
 log
 cacert.pem
