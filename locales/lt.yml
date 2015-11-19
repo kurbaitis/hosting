@@ -1,0 +1,25 @@
+lt:
+  time:
+    formats:
+      default: '%Y-%m-%d %H:%M'
+  labels:
+    number: Kreditinės kortelės numeris
+    month: Mėnesis
+    year: Metai
+    cvc: Kodas
+  title: Games-Monitor.net Counter-Strike 1.6 serverių hostingo demo (STEAM)
+  description: >
+    Ši serverių teikimo paslauga yra sukurta teikti Counter-Strike 1.6 žaidimo serverius iki %{m} vietų. Norint žaisti, reikia turėti <a href='http://store.steampowered.com/' target='_blank'>legalią žaidimo versiją</a>. Serveriai išdėstyti visame pasaulyje ir priklausomai nuo Jūsų lokacijos, serveris bus sukurtas tinkamiausiame duomenų centre.
+  refund: >
+    Atsargiai: ši paslauga negražina pinigų, jei serveris netenkina Jūsų poreikių.
+  pay: Mokėti
+  order_complete: >
+    Jūsų užsakymas sėkmingai įvykdytas, prašome peržvelgti detales ir išsaugoti, nes jas suteikiame tik vieną kartą. Prašome neperkrauti šio puslapio, nes būsite apmokestintas dar vieną kartą. Po galiojimo datos serveris bus išjuntas.
+  order_description: >
+    Prašome įvesti savo atsiskaitymo duomenis. Paslauga nesaugos šių duomenų jokiais formatais. Po to, kai išsiųsite formos duomenis, prašome palaukti iki %{m} minučių ir išsaugoti savo serverio detales.
+  expires_at: GALIOJA IKI 
+  price: '%{a} %{c}'
+  max_players: Maks. žaidėjai
+  price_th: 'Kaina (%{c})'
+  order: Užsakyti
+  error: 'Klaida, prašome skambinti %{t}'

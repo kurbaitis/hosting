@@ -1,0 +1,19 @@
+<%= header(binding) %>
+<% pay do |address, rcon, expires_at| %>
+<p><%= t('order_complete') %></p>
+  <table border="1">
+    <tr>
+      <th>IP:PORT</th>
+      <td><%= address %></td>
+    </tr>
+    <tr>
+      <th>RCON PASSWORD</th>
+      <td><%= rcon %></td>
+    </tr>
+    <tr>
+      <th><%= t('expires_at') %></th>
+      <td><%= expires_at %></td>
+    </tr>
+  </table>
+<% end %>
+<%= footer %>

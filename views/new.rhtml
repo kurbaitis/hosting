@@ -1,0 +1,26 @@
+<%= header(binding) %>
+<p><%= t('order_description', m: timeout_minutes) %></p>
+
+<form action='create', method='post'>
+  <label for='number'><%= t('labels.number') %></label>
+  <br />
+  <input type='text' name='number' size='16' />
+  <br />
+  <label for='month'><%= t('labels.month') %></label>
+  <br />
+  <input type='text' name='month' size='2' />
+  <br />
+  <label for='year'><%= t('labels.year') %></label>
+  <br />
+  <input type='text' name='year' size='4' />
+  <br />
+  <label for='cvc'><%= t('labels.cvc') %></label>
+  <br />
+  <input type='text' name='cvc' size='3' />
+  <% tp do |amount, currency, plan| %>
+    <p><%= t('price', a: amount, c: currency) %></p>
+    <input type='hidden' name='plan' value='<%= plan %>' />
+  <% end %>
+  <input type='submit' value='<%= t('pay') %>' />
+</form>
+<%= footer %>

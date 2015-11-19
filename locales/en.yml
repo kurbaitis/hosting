@@ -1,0 +1,25 @@
+en:
+  time:
+    formats:
+      default: '%Y-%m-%d %H:%M'
+  labels:
+    number: Credit card number
+    month: Month (m)
+    year: Year (YYYY)
+    cvc: CVC
+  title: Games-Monitor.net Counter-Strike 1.6 servers hosting demo (STEAM)
+  description: >
+    This hosting service is designed to provide you with Counter-Strike 1.6 servers up to %{m} max players. To use a server you will need a <a href='http://store.steampowered.com' target='_blank'>legal version of Counter-Strike 1.6</a>. Servers are distributed all over the world, depending on your IP the service will create your server in the nearest data center.
+  refund: >
+    Caution: this service does not provide refunds if a server does not satisfy your needs.
+  pay: Pay
+  order_complete: >
+    Your order has been completed successfully, please take a look at the details and save it because we provide these only one time. Please do not refresh this page because you will be charged one more time. After the expiration date the server will be powered off.
+  order_description: >
+    Please enter your billing credentials. The service won't save those in any format. After you submit the form, please wait up to %{m} minutes and save your server details.
+  expires_at: EXPIRES AT
+  price: '%{a} %{c}'
+  max_players: Max players
+  price_th: 'Price (%{c})'
+  order: Order
+  error: 'Error, please call %{t}'

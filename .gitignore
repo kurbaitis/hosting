@@ -1,0 +1,14 @@
+/data
+/tls
+/s
+/bin/stripe-console
+/bin
+log
+cacert.pem
+.gem
+.profile
+.bash*
+.gitconfig
+.less*
+.ssh
+.vim*
