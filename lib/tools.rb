@@ -114,6 +114,7 @@ module Tools
   end
   
   def footer
+    GC.start
     erb('footer')
   end
   
@@ -146,6 +147,7 @@ module Tools
   end
 
   def redirect_to(path)
+    GC.start
     url = ['https://', eget('WHOST'), path].join
     response.status = 301
     response.body = "<HTML><A HREF=\"#{url}\">#{url}</A>.</HTML>\n" 
