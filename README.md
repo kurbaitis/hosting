@@ -24,17 +24,18 @@ Edit ```.env``` file
 
 Add HTTP server startup script to your boot scripts (need to be run as root user):
 
-```logout```
-
-```cd /home/w```
-
-```cp bin/http /etc/init.d/```
-
-```update-rc.d http defaults```
-
-```update-rc.d http enable```
+```
+logout
+cd /home/w
+cp bin/http /etc/init.d/
+update-rc.d http defaults
+update-rc.d http enable
+```
 
 # Start
+
 ``` ./bin/start ```
+
 # Stop
+
 ``` ./bin/stop ```
