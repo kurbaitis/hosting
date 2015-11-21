@@ -22,7 +22,11 @@ Edit ```.env``` file
 
 ## Optional
 
-Add HTTP server startup script to your boot scripts:
+Add HTTP server startup script to your boot scripts (need to be run as root user):
+
+```logout```
+
+```cd /home/w```
 
 ```cp bin/http /etc/init.d/```
 
