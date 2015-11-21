@@ -1,7 +1,7 @@
 apt-get update
 apt-get upgrade -y
 
-apt-get install -y zlib1g-dev zlibc curl build-essential libc6-dev g++ gcc libcap2-bin libssl-dev libgdbm-dev libedit-dev libreadline-dev git
+apt-get install -y zlib1g-dev zlibc curl build-essential libc6-dev g++ gcc libcap2-bin libssl-dev libgdbm-dev libedit-dev libreadline-dev git haproxy
 
 cac='http://curl.haxx.se/ca/cacert.pem'
 ru='https://cache.ruby-lang.org/pub/ruby/stable'
