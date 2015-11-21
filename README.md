@@ -25,7 +25,9 @@ Edit ```.env``` file
 Add HTTP server startup script to your boot scripts:
 
 ```cp bin/http /etc/init.d/```
+
 ```update-rc.d http defaults```
+
 ```update-rc.d http enable```
 
 # Start
